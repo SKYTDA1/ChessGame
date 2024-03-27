@@ -171,6 +171,19 @@ public class ChessGame {
        frame.setDefaultCloseOperation(3);
        frame.setVisible(true);
     }
+public void move(int newX, int newY) {
+    // Lưu vị trí hiện tại của quân cờ
+    int oldX = this.xp;
+    int oldY = this.yp;
+    
+    // Di chuyển quân cờ đến vị trí mới
+    this.xp = newX;
+    this.yp = newY;
+    
+    // Tạo đối tượng Move và thêm vào movesHistory
+    Move move = new Move(oldX, oldY, newX, newY);
+    ChessGame.movesHistory.add(move);
+}
 public static void checkGameOver() {
     boolean wkingExists = false;
     boolean bkingExists = false;
