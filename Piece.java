@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
+ */
 package com.mycompany.chessgame;
 
 import java.util.LinkedList;
@@ -8,12 +12,16 @@ import java.util.LinkedList;
 public class Piece {
         int xp;
         int yp;
+        int x;
+        int y;
         boolean isWhite;
         LinkedList<Piece> ps;
         String name;
-       public Piece(int xp ,int yp ,String n, boolean isWhite , LinkedList<Piece> ps){
+       public Piece(int xp ,int yp , boolean isWhite ,String n, LinkedList<Piece> ps){
            this.xp = xp;
            this.yp = yp;
+           x=xp*64;
+           y=yp*64;
            this.isWhite = isWhite;
            this.ps = ps;
            name = n;
@@ -21,13 +29,26 @@ public class Piece {
        } 
        
         public void move(int xp,int yp){
-            ps.stream().filter((p) -> (p.xp==xp&&p.yp==yp)).forEachOrdered((p) ->{
-                p.kill();
-            });
+        if(ChessGame.getPiece(xp*64, yp*64)!=null){
+            if(ChessGame.getPiece(xp*64, yp*64).isWhite!=isWhite){
+            ChessGame.getPiece(xp*64, yp*64).kill();
+           }else{
+                x=this.xp*64;
+                y=this.yp*64;
+                return;
+            }
+        }
             this.xp=xp;
             this.yp=yp;
+            x=xp*64;
+            y=yp*64;
         }
         public void kill(){
+            
             ps.remove(this);
+            if(name.equalsIgnoreCase("king")){
+                ChessGame.checkGameOver();
+            }
         }
 }
+
