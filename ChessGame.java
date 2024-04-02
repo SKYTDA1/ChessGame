@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package com.mycompany.chessgame;
 
 import java.awt.Color;
@@ -44,39 +40,42 @@ public class ChessGame {
         ind++;
         }
         }
-     Piece brook=new Piece(0,0,false,"rook",ps);
-        Piece bkinght=new Piece(1,0,false,"kinght",ps);
-        Piece bbishop=new Piece(2,0,false,"bishop",ps);
-        Piece bqueen=new Piece(3,0,false,"queen",ps);
-        Piece bking=new Piece(4,0,false,"king",ps);
-        Piece bbishop2=new Piece(5,0,false,"bishop",ps);
-        Piece bkinght2=new Piece(6,0,false,"kinght",ps);
-        Piece brook2=new Piece(7,0,false,"rook",ps);
-        Piece bpawn1=new Piece(1,1,false,"pawn",ps);
-        Piece bpawn2=new Piece(2,1,false,"pawn",ps);
-        Piece bpawn3=new Piece(3,1,false,"pawn",ps);
-        Piece bpawn4=new Piece(4,1,false,"pawn",ps);
-        Piece bpawn5=new Piece(5,1,false,"pawn",ps);
-        Piece bpawn6=new Piece(6,1,false,"pawn",ps);
-        Piece bpawn7=new Piece(7,1,false,"pawn",ps);
-        Piece bpawn8=new Piece(0,1,false,"pawn",ps);
         
-        Piece wrook=new Piece(0,7,true,"rook",ps);
-        Piece wkinght=new Piece(1,7,true,"kinght",ps);
-        Piece wbishop=new Piece(2,7,true,"bishop",ps);
-        Piece wqueen=new Piece(3,7,true,"queen",ps);
-        Piece wking=new Piece(4,7,true,"king",ps);
-        Piece wbishop2=new Piece(5,7,true,"bishop",ps);
-        Piece wkinght2=new Piece(6,7,true,"kinght",ps);
-        Piece wrook2=new Piece(7,7,true,"rook",ps);
-        Piece wpawn1=new Piece(1,6,true,"pawn",ps);
-        Piece wpawn2=new Piece(2,6,true,"pawn",ps);
-        Piece wpawn3=new Piece(3,6,true,"pawn",ps);
-        Piece wpawn4=new Piece(4,6,true,"pawn",ps);
-        Piece wpawn5=new Piece(5,6,true,"pawn",ps);
-        Piece wpawn6=new Piece(6,6,true,"pawn",ps);
-        Piece wpawn7=new Piece(7,6,true,"pawn",ps);
-        Piece wpawn8=new Piece(0,6,true,"pawn",ps);
+       
+     Piece brook = new Piece(0, 0, false, "rook", ps);
+Piece bknight = new Piece(1, 0, false, "knight", ps);
+Piece bbishop = new Piece(2, 0, false, "bishop", ps);
+Piece bqueen = new Piece(3, 0, false, "queen", ps);
+Piece bking = new Piece(4, 0, false, "king", ps);
+Piece bbishop2 = new Piece(5, 0, false, "bishop", ps);
+Piece bknight2 = new Piece(6, 0, false, "knight", ps);
+Piece brook2 = new Piece(7, 0, false, "rook", ps);
+Piece bpawn1 = new Piece(1, 1, false, "pawn", ps);
+Piece bpawn2 = new Piece(2, 1, false, "pawn", ps);
+Piece bpawn3 = new Piece(3, 1, false, "pawn", ps);
+Piece bpawn4 = new Piece(4, 1, false, "pawn", ps);
+Piece bpawn5 = new Piece(5, 1, false, "pawn", ps);
+Piece bpawn6 = new Piece(6, 1, false, "pawn", ps);
+Piece bpawn7 = new Piece(7, 1, false, "pawn", ps);
+Piece bpawn8 = new Piece(0, 1, false, "pawn", ps);
+
+Piece wrook = new Piece(0, 7, true, "rook", ps);
+Piece wknight = new Piece(1, 7, true, "knight", ps);
+Piece wbishop = new Piece(2, 7, true, "bishop", ps);
+Piece wqueen = new Piece(3, 7, true, "queen", ps);
+Piece wking = new Piece(4, 7, true, "king", ps);
+Piece wbishop2 = new Piece(5, 7, true, "bishop", ps);
+Piece wknight2 = new Piece(6, 7, true, "knight", ps);
+Piece wrook2 = new Piece(7, 7, true, "rook", ps);
+Piece wpawn1 = new Piece(1, 6, true, "pawn", ps);
+Piece wpawn2 = new Piece(2, 6, true, "pawn", ps);
+Piece wpawn3 = new Piece(3, 6, true, "pawn", ps);
+Piece wpawn4 = new Piece(4, 6, true, "pawn", ps);
+Piece wpawn5 = new Piece(5, 6, true, "pawn", ps);
+Piece wpawn6 = new Piece(6, 6, true, "pawn", ps);
+Piece wpawn7 = new Piece(7, 6, true, "pawn", ps);
+Piece wpawn8 = new Piece(0, 6, true, "pawn", ps);
+
         
        JFrame frame = new JFrame();
        frame.setBounds(10,10,512,512);
@@ -142,20 +141,63 @@ public class ChessGame {
             }
         });
         frame.addMouseListener(new MouseListener(){
+         private String type;
             @Override
             public void mouseClicked(MouseEvent e){
             }
 
             @Override
             public void mousePressed(MouseEvent e){
-                 //System.out.print((getPiece(e.getX(),e.getY()).isWhite?"white":"black")+getPiece(e.getX(),e.getY()).name+"black");
-                selectedPiece=getPiece(e.getX(),e.getY());
+               // Kiểm tra xem có phải là quân cờ hợp lệ không
+        Piece clickedPiece = getPiece(e.getX(), e.getY());
+        if (clickedPiece != null && ((isWhiteTurn && clickedPiece.isWhite) || (!isWhiteTurn && !clickedPiece.isWhite))) {
+            // Lưu loại quân cờ được chọn
+            type = clickedPiece.type;
+            selectedPiece = clickedPiece;
+        } else {
+            // Nếu không phải là quân cờ hợp lệ, đặt selectedPiece = null
+            selectedPiece = null;
+        }
             }
 
             @Override
             public void mouseReleased(MouseEvent e){
-               selectedPiece.move(e.getX()/64,e.getY()/64 );
-               frame.repaint();
+            if (selectedPiece != null) {
+        // Lưu vị trí ban đầu của quân cờ trước khi di chuyển
+        int oldX = selectedPiece.x / 64;
+        int oldY = selectedPiece.y / 64;
+        
+        // Kiểm tra xem di chuyển có hợp lệ không
+        Move move = new Move(oldX, oldY, e.getX() / 64, e.getY() / 64, this.type);
+        boolean isValidMove = false;
+        if (this.type != null && this.type.equals("rook")) {
+            isValidMove = move.isValidRookMove();
+        } else if (this.type != null && this.type.equals("pawn")) {
+            isValidMove = move.isValidPawnMove();
+        } else if (this.type != null && this.type.equals("knight")) {
+            isValidMove = move.isValidKnightMove();
+        } else if (this.type != null && this.type.equals("bishop")) {
+            isValidMove = move.isValidBishopMove();
+        } else if (this.type != null && this.type.equals("queen")) {
+            isValidMove = move.isValidQueenMove();
+        } else if (this.type != null && this.type.equals("king")) {
+            isValidMove = move.isValidKingMove();
+        }
+        if (isValidMove) {
+    // Nếu di chuyển hợp lệ, thực hiện di chuyển và cập nhật giao diện
+    selectedPiece.move(e.getX() / 64, e.getY() / 64);
+    isWhiteTurn = !isWhiteTurn;
+    frame.repaint();
+} else {
+    // Nếu di chuyển không hợp lệ, trả quân cờ về vị trí ban đầu
+    selectedPiece.x = oldX * 64;
+    selectedPiece.y = oldY * 64;
+    frame.repaint();
+    // Hiển thị thông báo và không thực hiện di chuyển
+    JOptionPane.showMessageDialog(null, "Di chuyển không hợp lệ!");
+}
+
+    }
             }
 
             @Override
@@ -170,20 +212,26 @@ public class ChessGame {
        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
        frame.setDefaultCloseOperation(3);
        frame.setVisible(true);
-    }
-public void move(int newX, int newY) {
-    // Lưu vị trí hiện tại của quân cờ
-    int oldX = this.xp;
-    int oldY = this.yp;
-    
-    // Di chuyển quân cờ đến vị trí mới
-    this.xp = newX;
-    this.yp = newY;
-    
-    // Tạo đối tượng Move và thêm vào movesHistory
-    Move move = new Move(oldX, oldY, newX, newY);
-    ChessGame.movesHistory.add(move);
 }
+//    private int xp;
+//    private int yp;
+//public void move(int newX, int newY) {
+//    // Lưu vị trí hiện tại của quân cờ
+//    int oldX = this.xp;
+//    int oldY = this.yp;
+//    
+//    // Di chuyển quân cờ đến vị trí mới
+//    this.xp = newX;
+//    this.yp = newY;
+//    
+//    // Tạo đối tượng Move và thêm vào movesHistory
+//    Move move = new Move(oldX, oldY, newX, newY);
+//    ChessGame.movesHistory.add(move);
+//}
+
+    public ChessGame() {
+    }
+
 public static void checkGameOver() {
     boolean wkingExists = false;
     boolean bkingExists = false;
@@ -210,19 +258,15 @@ public static void checkGameOver() {
         System.exit(0);
     }
 }
-public static boolean askForMoveHistory(){
-    int choice = 
-            JOptionPane.showConfirmDialog(null,"Bạn muốn xem bảng tổng kết","Xem bảng tổng kết",JOptionPane.YES_NO_OPTION);
-    return choice == JOptionPane.YES_OPTION;
-}
 public static void showMoveHistory(){
      StringBuilder history = new StringBuilder();
         for (int i = 0; i < movesHistory.size(); i++) {
             Move move = movesHistory.get(i);
-            history.append("Bước").append(i+1).append(":");
-            history.append(move.toString()).append("\n");
+            history.append("Bước").append(i+1).append(": ");
+            history.append("(").append(move.startX).append("-").append(move.startY).append(") -> ");
+            history.append("(").append(move.endX).append("-").append(move.endY).append(")\n");
         }
-            JOptionPane.showMessageDialog(null, history.toString(),"Bảng tổng kết",JOptionPane.INFORMATION_MESSAGE);      
+        JOptionPane.showMessageDialog(null, history.toString(),"Bảng tổng kết",JOptionPane.INFORMATION_MESSAGE);      
 }
 
     public static Piece getPiece(int x,int y){
@@ -235,30 +279,8 @@ public static void showMoveHistory(){
        }
        return null;
     }
-public class Move {
-    private final int startX;
-    private final int startY;
-    private final int endX;
-    private final int endY;
 
-    public Move(int startX, int startY, int endX, int endY) {
-        this.startX = startX;
-        this.startY = startY;
-        this.endX = endX;
-        this.endY = endY;
-    }
-
-    @Override
-    public String toString() {
-        char startColumn = (char) ('A' + startX);
-        char endColumn = (char) ('A' + endX);
-        int startRow = 8 - startY;
-        int endRow = 8 - endY;
-        return "Từ " + startColumn + startRow + " đến " + endColumn + endRow;
-    }
-}
 }
    
     
-
 
